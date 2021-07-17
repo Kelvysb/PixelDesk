@@ -1,0 +1,74 @@
+hints:
+
+**kargs
+
+floatlayout - base
+image - elements
+
+
+tamanho e pos da tela:
+self.size
+self.pos
+
+Interval exec:
+From kivy.clock import Clock
+	Clock.schedule_interval(self.update, 1/30)
+
+
+Properties
+From klivy.properties import Numericproperty
+
+	speed = NumericProperty(0)
+
+Animations:
+
+from kivi.animation import Animation
+
+
+
+desligar size hint = size_hint: none, none
+size fixo
+
+on .kv 
+use id: to get reference
+	self.ids.<id>
+
+
+event method:
+on_touch_down(self, *args):
+
+call screen manager
+App.get_running_app().root.current = "Outra tela"
+
+
+Manager telas on .kv:
+
+Manager:
+    Menu: 
+        name: 'menu'
+    Game: 
+        name: 'game'
+    GameOver: 
+        name: 'gameOver'
+
+<MenuButton@Button>:
+    font_size:'50sp'
+    background_normal: 'menubutton.png'
+    background_down: 'menupressed.png'
+    border: 90,90,90,90
+
+<Menu>:
+    BoxLayout:
+        Canvas:
+            Color:
+                rgba: 1,1,1,1
+            Retangle:
+                size: self.size
+                pos: self.pos
+                source: 'batata.png'
+        orientation: 'vertical'
+        padding: '200dp', '50dp'
+        spacing: '150dp'
+        MunuButton:
+            on_release: somefunc()
+            ..........

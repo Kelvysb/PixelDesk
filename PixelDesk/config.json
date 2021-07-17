@@ -1,0 +1,5 @@
+{
+    "weatherApiKey": "<API_KEY>",
+    "city": "<CITY>",
+    "intercomUrl": "<INTERCOM_API_URL>"
+}
