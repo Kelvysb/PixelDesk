@@ -12,6 +12,7 @@ from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import NumericProperty, StringProperty, ColorProperty
 from kivy.config import Config
+from kivy.core.window import Window
 
 PIXEL_SIZE = 3
 Config.set('kivy','window_icon','images/icon.png')
@@ -161,4 +162,5 @@ class PixelDesk(App):
         self.profile.dump_stats('pixelDesk.profile')
 
 if __name__ == '__main__':
+    Window.fullscreen = True
     PixelDesk().run()
