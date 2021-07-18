@@ -14,6 +14,9 @@ from kivy.properties import NumericProperty, StringProperty, ColorProperty
 from kivy.config import Config
 from kivy.core.window import Window
 
+BACKGROUND_COLOR = [0, 0, 0, 1]
+ALARM_COLOR = [1, 0, 0, 1]
+FONT_COLOR = [1, 1, 1, 1]
 PIXEL_SIZE = 3
 Config.set('kivy','window_icon','images/icon.png')
 
@@ -67,7 +70,8 @@ class PixelDesk(App):
     WEATHER_ICON = StringProperty('')
     CLOCK = StringProperty('')
     DATE = StringProperty('')
-    BACK_COLOR = ColorProperty("#ffffffff")
+    BACK_COLOR = ColorProperty(BACKGROUND_COLOR)
+    FONT_COLOR = ColorProperty(FONT_COLOR)
     MESSAGE = StringProperty('')
 
     def __init__(self, **kwargs):
@@ -116,12 +120,12 @@ class PixelDesk(App):
         while self.INTERCOM_STATE == 1 and self.running:            
             sleep(0.5)
             if toggle:
-                self.BACK_COLOR = [1, 0, 0, 1]
+                self.BACK_COLOR = ALARM_COLOR
             else:
-                self.BACK_COLOR = [1, 1, 1, 1]                
+                self.BACK_COLOR = BACKGROUND_COLOR              
             toggle = not toggle
         try:
-            self.BACK_COLOR = [1, 1, 1, 1]
+            self.BACK_COLOR = BACKGROUND_COLOR 
             self.alarm_on = False
             self.MESSAGE = ''
         except Exception:
