@@ -73,6 +73,8 @@ class PixelDesk(App):
     BACK_COLOR = ColorProperty(BACKGROUND_COLOR)
     FONT_COLOR = ColorProperty(FONT_COLOR)
     MESSAGE = StringProperty('')
+    INTERCOM_STATUS = StringProperty('')
+    WEATHER_STATUS = StringProperty('')
 
     def __init__(self, **kwargs):
         super(PixelDesk, self).__init__(**kwargs)
@@ -141,8 +143,9 @@ class PixelDesk(App):
             self.WEATHER = self.weather_data['weather'][0]['main']
             self.WEATHER_DESC = self.weather_data['weather'][0]['description']            
             self.WEATHER_ICON = f'http://openweathermap.org/img/wn/{ self.weather_data["weather"][0]["icon"] }@2x.png'
+            self.WEATHER_STATUS = 'Weather: online'
         except Exception:
-            pass
+            self.WEATHER_STATUS = 'Weather: offline'
 
     def update_intercom(self):
         try:
@@ -151,8 +154,9 @@ class PixelDesk(App):
             if self.INTERCOM_STATE == 1 and not self.alarm_on:
                 self.alarm_on = True
                 t_alarm = Thread(target=self.alarm_timer).start()
+            self.INTERCOM_STATUS = 'Intercom: online'
         except Exception:
-            pass
+            self.INTERCOM_STATUS = 'Intercom: offline'
     
     
     def on_start(self):
@@ -167,4 +171,5 @@ class PixelDesk(App):
 
 if __name__ == '__main__':
     Window.fullscreen = True
+    Window.show_cursor = False
     PixelDesk().run()

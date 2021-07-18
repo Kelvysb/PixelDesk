@@ -71,13 +71,24 @@ Manager:
             source: 'images/Box_S.png'
             size_hint: None, 1
             keep_ratio: False
-        BoxLayout:
-            orientation: 'horizontal'
+        GridLayout:
+            cols: 1
             size_hint: 1, 1
             PixelLabel:
                 text: app.MESSAGE
-                font_size: '40sp'
+                font_size: '20sp'
                 color: app.FONT_COLOR
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 1            
+                PixelLabel:
+                    text: app.INTERCOM_STATUS 
+                    font_size: '25sp'
+                    color: app.FONT_COLOR
+                PixelLabel:
+                    text: app.WEATHER_STATUS 
+                    font_size: '25sp'
+                    color: app.FONT_COLOR
                 
         PixelImage:
             source: 'images/Box_S.png'
@@ -111,4 +122,4 @@ Manager:
         ClockBox:
             size_hint: 1, 0.2
         BottomBox:
-            size_hint: 1, 0.2
+            size_hint: 1, 0.3
