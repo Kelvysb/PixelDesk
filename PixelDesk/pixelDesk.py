@@ -167,4 +167,5 @@ class PixelDesk(App):
 
 if __name__ == '__main__':
     Window.fullscreen = True
+    Window.show_cursor = False
     PixelDesk().run()
