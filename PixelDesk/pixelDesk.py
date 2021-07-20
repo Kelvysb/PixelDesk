@@ -94,8 +94,8 @@ class PixelDesk(App):
 
         while self.running:                                
             try:
-                self.CLOCK = datetime.now().strftime("%H:%M")
-                self.DATE = datetime.now().strftime("%d/%m/%Y")
+                self.CLOCK = datetime.now().strftime('%H:%M')
+                self.DATE = datetime.now().strftime('%d/%m/%Y')
             except Exception:
                 pass
 
@@ -164,16 +164,17 @@ class PixelDesk(App):
     
     def on_start(self):
         self.running = True
+        logging.basicConfig(filename=self.pixelDeskConfig['logFile'], level=logging.INFO, force=True)
+        logging.info('Started')
 
     def on_stop(self):
         self.running = False
+        logging.info('Finished')
 
 if __name__ == '__main__':
     abspath = os.path.abspath(__file__)
     dname = os.path.dirname(abspath)
-    os.chdir(dname)
-    logging.basicConfig(filename='pixeldesk.log', level=logging.INFO, force=True)
-    logging.info('Started')
+    os.chdir(dname)   
     Window.fullscreen = True
     Window.show_cursor = False
     PixelDesk().run()

@@ -1,5 +1,6 @@
 {
     "weatherApiKey": "<API_KEY>",
     "city": "<CITY>",
-    "intercomUrl": "<INTERCOM_API_URL>"
+    "intercomUrl": "<INTERCOM_URL>",
+    "logFile": "pixeldesk.log"
 }
