@@ -164,7 +164,10 @@ class PixelDesk(App):
     
     def on_start(self):
         self.running = True
-        logging.basicConfig(filename=self.pixelDeskConfig['logFile'], level=logging.INFO, force=True)
+        for handler in logging.root.handlers[:]:
+            logging.root.removeHandler(handler)
+        FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        logging.basicConfig(filename=self.pixelDeskConfig['logFile'], format=FORMAT, level=logging.INFO)
         logging.info('Started')
 
     def on_stop(self):
@@ -178,4 +181,3 @@ if __name__ == '__main__':
     Window.fullscreen = True
     Window.show_cursor = False
     PixelDesk().run()
-    logging.info('Finished')
