@@ -1,3 +1,4 @@
+import os
 import logging
 from datetime import datetime
 from threading import Thread
@@ -168,9 +169,12 @@ class PixelDesk(App):
         self.running = False
 
 if __name__ == '__main__':
+    abspath = os.path.abspath(__file__)
+    dname = os.path.dirname(abspath)
+    os.chdir(dname)
     logging.basicConfig(filename='pixeldesk.log', level=logging.INFO, force=True)
     logging.info('Started')
-    Window.fullscreen = False
+    Window.fullscreen = True
     Window.show_cursor = False
     PixelDesk().run()
     logging.info('Finished')
