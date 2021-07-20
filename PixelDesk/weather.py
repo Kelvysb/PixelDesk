@@ -1,3 +1,4 @@
+import logging
 import requests
 import json
 
@@ -11,5 +12,6 @@ def get_weather(city, api_key):
         response = requests.request("GET", url, headers=headers, data=payload)
 
         return json.loads(response.text)
-    except Exception:
+    except Exception as e:
+        logging.error(str(e))
         return None

@@ -1,4 +1,4 @@
-import cProfile
+import logging
 from datetime import datetime
 from threading import Thread
 from time import sleep
@@ -83,38 +83,33 @@ class PixelDesk(App):
         self.update_weather()
         self.update_intercom()
 
-        t_weather = Thread(target=self.weather_timer).start()
-        t_intercom = Thread(target=self.intercom_timer).start()
-        t_clock = Thread(target=self.clock_timer).start()
+        t_clock = Thread(target=self.clock_timer, name='main_clock').start()
     
     def clock_timer(self):
-        while self.running:
-            sleep(1)
+        timeout_weather = 30
+        timeout_intercom = 5
+        count_weather = 0
+        count_intercom = 0
+
+        while self.running:                                
             try:
-                self.CLOCK = datetime.now().strftime("%H:%M:%S")
+                self.CLOCK = datetime.now().strftime("%H:%M")
                 self.DATE = datetime.now().strftime("%d/%m/%Y")
             except Exception:
                 pass
 
-    def weather_timer(self):
-        timeout = 30
-        count = 0
-        while self.running:
-            sleep(1)
-            count = count + 1
-            if count >= timeout:
-                count = 0
+            if count_weather >= timeout_weather:
+                count_weather = 0
                 self.update_weather()
 
-    def intercom_timer(self):
-        timeout = 5
-        count = 0
-        while self.running:
-            sleep(1)
-            count = count + 1
-            if count >= timeout:
-                count = 0
+            if count_intercom >= timeout_intercom:
+                count_intercom = 0
                 self.update_intercom()
+
+            count_weather = count_weather + 1
+            count_intercom = count_intercom + 1
+
+            sleep(1)
 
     def alarm_timer(self):
         toggle = False
@@ -134,42 +129,48 @@ class PixelDesk(App):
             pass
 
     def update_weather(self):
-        try:
+        try:            
             self.weather_data = get_weather(self.pixelDeskConfig['city'], self.pixelDeskConfig['weatherApiKey'])
-            self.TEMPERATURE = int(self.weather_data['main']['temp'])
-            self.FEELS_LIKE = int(self.weather_data['main']['feels_like'])
-            self.HUMIDITY = int(self.weather_data['main']['humidity'])
-            self.WIND = float(self.weather_data['wind']['speed'])
-            self.WEATHER = self.weather_data['weather'][0]['main']
-            self.WEATHER_DESC = self.weather_data['weather'][0]['description']            
-            self.WEATHER_ICON = f'http://openweathermap.org/img/wn/{ self.weather_data["weather"][0]["icon"] }@2x.png'
-            self.WEATHER_STATUS = 'Weather: online'
+            if self.weather_data != None:
+                self.TEMPERATURE = int(self.weather_data['main']['temp'])
+                self.FEELS_LIKE = int(self.weather_data['main']['feels_like'])
+                self.HUMIDITY = int(self.weather_data['main']['humidity'])
+                self.WIND = float(self.weather_data['wind']['speed'])
+                self.WEATHER = self.weather_data['weather'][0]['main']
+                self.WEATHER_DESC = self.weather_data['weather'][0]['description']            
+                self.WEATHER_ICON = f'http://openweathermap.org/img/wn/{ self.weather_data["weather"][0]["icon"] }@2x.png'
+                self.WEATHER_STATUS = 'Weather: online'
+            else:
+                self.WEATHER_STATUS = 'Weather: offline'
         except Exception:
-            self.WEATHER_STATUS = 'Weather: offline'
+            self.WEATHER_STATUS = 'Weather: error'
 
     def update_intercom(self):
         try:
             self.intercom = get_intercom(self.pixelDeskConfig['intercomUrl'])
-            self.INTERCOM_STATE = 0 if self.intercom['external'] == 'OFF' else 1
-            if self.INTERCOM_STATE == 1 and not self.alarm_on:
-                self.alarm_on = True
-                t_alarm = Thread(target=self.alarm_timer).start()
-            self.INTERCOM_STATUS = 'Intercom: online'
+            if self.intercom != None:
+                self.INTERCOM_STATE = 0 if self.intercom['external'] == 'OFF' else 1
+                if self.INTERCOM_STATE == 1 and not self.alarm_on:
+                    self.alarm_on = True
+                    logging.info(f'Intercom call at: {datetime.now().strftime("%d/%m/%Y")} {datetime.now().strftime("%H:%M")}')
+                    t_alarm = Thread(target=self.alarm_timer).start()
+                self.INTERCOM_STATUS = 'Intercom: online'
+            else:
+                self.INTERCOM_STATUS = 'Intercom: offline'    
         except Exception:
-            self.INTERCOM_STATUS = 'Intercom: offline'
+            self.INTERCOM_STATUS = 'Intercom: error'
     
     
     def on_start(self):
         self.running = True
-        self.profile = cProfile.Profile()
-        self.profile.enable()
 
     def on_stop(self):
         self.running = False
-        self.profile.disable()
-        self.profile.dump_stats('pixelDesk.profile')
 
 if __name__ == '__main__':
-    Window.fullscreen = True
+    logging.basicConfig(filename='pixeldesk.log', level=logging.INFO, force=True)
+    logging.info('Started')
+    Window.fullscreen = False
     Window.show_cursor = False
     PixelDesk().run()
+    logging.info('Finished')
