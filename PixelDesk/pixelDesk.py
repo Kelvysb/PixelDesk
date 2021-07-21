@@ -80,7 +80,16 @@ class PixelDesk(App):
     MESSAGE = StringProperty('')
     INTERCOM_STATUS = StringProperty('')
     WEATHER_STATUS = StringProperty('')
-        
+
+    def __init__(self, **kwargs):
+        super(PixelDesk, self).__init__(**kwargs)
+
+        self.pixelDeskConfig = get_config()
+        self.update_weather()
+        self.update_intercom()
+
+        Clock.schedule_interval(lambda dt: self.clock_timer(), 1)
+    
     def clock_timer(self):                             
         try:
             self.CLOCK = datetime.now().strftime('%H:%M')
@@ -146,12 +155,8 @@ class PixelDesk(App):
             self.INTERCOM_STATUS = 'Intercom: error'
     
     def on_start(self):
-        self.pixelDeskConfig = get_config()
         FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
         logging.basicConfig(filename=self.pixelDeskConfig['logFile'], format=FORMAT, level=logging.INFO, force=True)
-        self.update_weather()
-        self.update_intercom()
-        Clock.schedule_interval(lambda dt: self.clock_timer(), 1)
         logging.info('Started')
 
     def on_stop(self):
@@ -161,6 +166,6 @@ if __name__ == '__main__':
     abspath = os.path.abspath(__file__)
     dname = os.path.dirname(abspath)
     os.chdir(dname)   
-    Window.fullscreen = True
+    Window.fullscreen = False
     Window.show_cursor = False
     PixelDesk().run()
