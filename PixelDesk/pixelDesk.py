@@ -1,8 +1,6 @@
 import os
 import logging
 from datetime import datetime
-from threading import Thread
-from time import sleep
 from pixelDeskConfig import get_config
 from weather import get_weather
 from intercom import get_intercom
@@ -14,6 +12,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import NumericProperty, StringProperty, ColorProperty
 from kivy.config import Config
 from kivy.core.window import Window
+from kivy.clock import Clock
 
 BACKGROUND_COLOR = [0, 0, 0, 1]
 ALARM_COLOR = [1, 0, 0, 1]
@@ -58,8 +57,13 @@ class Config(Screen):
     pass
 
 class PixelDesk(App):
-    running = True
+    alarm_event = {}
     alarm_on = False
+    toggle_alarm = False
+    timeout_weather = 30
+    timeout_intercom = 2
+    count_weather = 0
+    count_intercom = 0 
     PIXEL_SIZE = NumericProperty(PIXEL_SIZE)
     TEMPERATURE = NumericProperty(1.0)
     FEELS_LIKE = NumericProperty(1.0)
@@ -84,50 +88,32 @@ class PixelDesk(App):
         self.update_weather()
         self.update_intercom()
 
-        t_clock = Thread(target=self.clock_timer, name='main_clock').start()
+        Clock.schedule_interval(lambda dt: self.clock_timer(), 1)
     
-    def clock_timer(self):
-        timeout_weather = 30
-        timeout_intercom = 5
-        count_weather = 0
-        count_intercom = 0
-
-        while self.running:                                
-            try:
-                self.CLOCK = datetime.now().strftime('%H:%M')
-                self.DATE = datetime.now().strftime('%d/%m/%Y')
-            except Exception:
-                pass
-
-            if count_weather >= timeout_weather:
-                count_weather = 0
-                self.update_weather()
-
-            if count_intercom >= timeout_intercom:
-                count_intercom = 0
-                self.update_intercom()
-
-            count_weather = count_weather + 1
-            count_intercom = count_intercom + 1
-
-            sleep(1)
-
-    def alarm_timer(self):
-        toggle = False
-        self.MESSAGE = 'Intercom!!!'        
-        while self.INTERCOM_STATE == 1 and self.running:            
-            sleep(0.5)
-            if toggle:
-                self.BACK_COLOR = ALARM_COLOR
-            else:
-                self.BACK_COLOR = BACKGROUND_COLOR              
-            toggle = not toggle
+    def clock_timer(self):                             
         try:
-            self.BACK_COLOR = BACKGROUND_COLOR 
-            self.alarm_on = False
-            self.MESSAGE = ''
+            self.CLOCK = datetime.now().strftime('%H:%M')
+            self.DATE = datetime.now().strftime('%d/%m/%Y')
         except Exception:
             pass
+
+        if self.count_weather >= self.timeout_weather:
+            self.count_weather = 0
+            self.update_weather()
+
+        if self.count_intercom >= self.timeout_intercom:
+            self.count_intercom = 0
+            self.update_intercom()
+
+        self.count_weather = self.count_weather + 1
+        self.count_intercom = self.count_intercom + 1
+
+    def alarm_timer(self): 
+        if self.toggle_alarm:
+            self.BACK_COLOR = ALARM_COLOR
+        else:
+            self.BACK_COLOR = BACKGROUND_COLOR              
+        self.toggle_alarm = not self.toggle_alarm
 
     def update_weather(self):
         try:            
@@ -150,26 +136,30 @@ class PixelDesk(App):
         try:
             self.intercom = get_intercom(self.pixelDeskConfig['intercomUrl'])
             if self.intercom != None:
+                self.INTERCOM_STATUS = 'Intercom: online'
                 self.INTERCOM_STATE = 0 if self.intercom['external'] == 'OFF' else 1
                 if self.INTERCOM_STATE == 1 and not self.alarm_on:
                     self.alarm_on = True
+                    self.toggle_alarm = False
+                    self.MESSAGE = 'Intercom!!'
                     logging.info(f'Intercom call at: {datetime.now().strftime("%d/%m/%Y")} {datetime.now().strftime("%H:%M")}')
-                    t_alarm = Thread(target=self.alarm_timer).start()
-                self.INTERCOM_STATUS = 'Intercom: online'
+                    self.alarm_event = Clock.schedule_interval(lambda dt: self.alarm_timer(), 0.5)
+                elif self.INTERCOM_STATE == 0 and self.alarm_on:
+                    self.alarm_event.cancel()
+                    self.BACK_COLOR = BACKGROUND_COLOR 
+                    self.alarm_on = False
+                    self.MESSAGE = ''
             else:
                 self.INTERCOM_STATUS = 'Intercom: offline'    
         except Exception:
             self.INTERCOM_STATUS = 'Intercom: error'
     
-    
     def on_start(self):
-        self.running = True
         FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
         logging.basicConfig(filename=self.pixelDeskConfig['logFile'], format=FORMAT, level=logging.INFO, force=True)
         logging.info('Started')
 
     def on_stop(self):
-        self.running = False
         logging.info('Finished')
 
 if __name__ == '__main__':
