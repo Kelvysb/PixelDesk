@@ -1,5 +1,6 @@
 import os
 import logging
+import gc
 from datetime import datetime
 from pixelDeskConfig import get_config
 from weather import get_weather
@@ -60,10 +61,12 @@ class PixelDesk(App):
     alarm_event = {}
     alarm_on = False
     toggle_alarm = False
+    timeout_gc = 60
     timeout_weather = 30
     timeout_intercom = 2
     count_weather = 0
     count_intercom = 0 
+    count_gc = 0 
     PIXEL_SIZE = NumericProperty(PIXEL_SIZE)
     TEMPERATURE = NumericProperty(1.0)
     FEELS_LIKE = NumericProperty(1.0)
@@ -97,6 +100,10 @@ class PixelDesk(App):
         except Exception:
             pass
 
+        if self.count_gc >= self.timeout_gc:
+            self.count_gc = 0
+            gc.collect()
+
         if self.count_weather >= self.timeout_weather:
             self.count_weather = 0
             self.update_weather()
@@ -107,6 +114,7 @@ class PixelDesk(App):
 
         self.count_weather = self.count_weather + 1
         self.count_intercom = self.count_intercom + 1
+        self.count_gc = self.count_gc + 1
 
     def alarm_timer(self): 
         if self.toggle_alarm:
