@@ -1,0 +1,127 @@
+﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+@font-face {
+    font-family: 'Minecraft';
+    src: url('/fonts/Minecraft.ttf');
+}
+
+html, body {
+    font-family: 'Minecraft';
+    background-color: var(--background);
+    color: var(--font-color);
+    height: 100%;
+    width: 100%;
+}
+
+img {
+    image-rendering: pixelated;
+}
+
+#app {
+    height: 100%;
+    width: 100%;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+}
+
+.main-container {
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.frame-box {
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.top-bottom-frame {
+    display: flex;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+.middle-frame {
+    display: flex;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    height: 100%;
+}
+
+.stretch-line {
+    width: calc(100% - (var(--frame-ratio) * 2));
+    height: var(--frame-ratio);
+}
+
+.corner {
+    width: var(--frame-ratio);
+    height: var(--frame-ratio);
+}
+
+.stretch-column {
+    width: var(--frame-ratio);
+    height: 100%;
+}
+
+.frame-content {
+    width: 100%;
+    height: 100%;
+}
+
+.center-content {
+    margin-top: 30px;
+    height: calc(100% - var(--bottom-box-height) - var(--top-row-height) - 80px);
+}
+
+.Red {
+    color: var(--alert-color)
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.alert {
+    background-color: var(--background);
+    animation-name: alert;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes alert {
+    from {
+        background-color: var(--alert-color);
+    }
+
+    to {
+        background-color: var(--background);
+    }
+}

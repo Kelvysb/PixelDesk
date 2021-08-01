@@ -1,0 +1,12 @@
+D:\Repositories\PixelDesk\PixelDesk\PixelDesk\Shared\bin\Debug\net5.0\PixelDesk.Shared.deps.json
+D:\Repositories\PixelDesk\PixelDesk\PixelDesk\Shared\bin\Debug\net5.0\PixelDesk.Shared.dll
+D:\Repositories\PixelDesk\PixelDesk\PixelDesk\Shared\bin\Debug\net5.0\ref\PixelDesk.Shared.dll
+D:\Repositories\PixelDesk\PixelDesk\PixelDesk\Shared\bin\Debug\net5.0\PixelDesk.Shared.pdb
+D:\Repositories\PixelDesk\PixelDesk\PixelDesk\Shared\obj\Debug\net5.0\PixelDesk.Shared.csprojAssemblyReference.cache
+D:\Repositories\PixelDesk\PixelDesk\PixelDesk\Shared\obj\Debug\net5.0\PixelDesk.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repositories\PixelDesk\PixelDesk\PixelDesk\Shared\obj\Debug\net5.0\PixelDesk.Shared.AssemblyInfoInputs.cache
+D:\Repositories\PixelDesk\PixelDesk\PixelDesk\Shared\obj\Debug\net5.0\PixelDesk.Shared.AssemblyInfo.cs
+D:\Repositories\PixelDesk\PixelDesk\PixelDesk\Shared\obj\Debug\net5.0\PixelDesk.Shared.csproj.CoreCompileInputs.cache
+D:\Repositories\PixelDesk\PixelDesk\PixelDesk\Shared\obj\Debug\net5.0\PixelDesk.Shared.dll
+D:\Repositories\PixelDesk\PixelDesk\PixelDesk\Shared\obj\Debug\net5.0\ref\PixelDesk.Shared.dll
+D:\Repositories\PixelDesk\PixelDesk\PixelDesk\Shared\obj\Debug\net5.0\PixelDesk.Shared.pdb

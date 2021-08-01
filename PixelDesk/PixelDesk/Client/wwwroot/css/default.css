@@ -1,0 +1,9 @@
+﻿:root {
+    --background: #090909;
+    --detail-color: #ffffff;
+    --font-color: #d8d8d8;
+    --alert-color: #ff0000;
+    --frame-ratio: 20px;
+    --bottom-box-height: 200px;
+    --top-row-height: 30px;
+}

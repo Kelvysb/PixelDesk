@@ -1,0 +1,27 @@
+﻿@inherits TopRowBase
+
+<div class="top-row bottom-box">
+    <div class="top-bottom-frame">
+        <img src="/images/Box_TL.png" class="corner" />
+        <img src="/images/Box_T.png" class="stretch-line" />
+        <img src="/images/Box_TR.png" class="corner" />
+    </div>
+    <div class="middle-frame">
+        <img src="/images/Box_S.png" class="stretch-column" />
+        <div class="frame-content box-content">
+            <div class="clock">
+                <label>@Clock</label>
+            </div>
+            <div class="states">
+                <label class="@(!IntercomState.Equals("Online")?"Red":"")">Intercom: @IntercomState</label>
+                <label class="ml-5 @(!WeatherState.Equals("Online")?"Red":"")">Weather: @WeatherState</label>
+            </div>
+        </div>
+        <img src="/images/Box_S.png" class="stretch-column" />
+    </div>
+    <div class="top-bottom-frame">
+        <img src="/images/Box_BL.png" class="corner" />
+        <img src="/images/Box_B.png" class="stretch-line" />
+        <img src="/images/Box_BR.png" class="corner" />
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@inherits WeatherBase
+
+<div class="frame-box weather-box">
+    <div class="top-bottom-frame">
+        <img src="/images/Box_TL.png" class="corner" />
+        <img src="/images/Box_T.png" class="stretch-line" />
+        <img src="/images/Box_TR.png" class="corner" />
+    </div>
+    <div class="middle-frame">
+        <img src="/images/Box_S.png" class="stretch-column" />
+        <div class="frame-content box-content">
+            @if (OpenWeather != null)
+            {
+            <div class="infos">
+                <label>Temperature: @OpenWeather.Main.Temp&deg;</label>
+                <label>Feels Like: @OpenWeather.Main.FeelsLike&deg;</label>
+                <label>Humidity: @OpenWeather.Main.Humidity%</label>
+                <label>Weather: @OpenWeather.Weather.First().Description</label>
+                <label>Wind: @OpenWeather.Wind.Speed</label>
+            </div>
+                <div class="weather-icon">
+                    <img src="@Icon" class="icon" />
+                </div>
+            }
+        </div>
+        <img src="/images/Box_S.png" class="stretch-column" />
+    </div>
+    <div class="top-bottom-frame">
+        <img src="/images/Box_BL.png" class="corner" />
+        <img src="/images/Box_B.png" class="stretch-line" />
+        <img src="/images/Box_BR.png" class="corner" />
+    </div>
+</div>

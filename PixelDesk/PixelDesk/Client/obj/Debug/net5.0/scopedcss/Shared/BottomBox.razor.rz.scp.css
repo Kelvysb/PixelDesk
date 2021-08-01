@@ -1,0 +1,14 @@
+.bottom-box[b-dm6jnrpwb8] {
+    height: var(--bottom-box-height);
+}
+
+.box-content[b-dm6jnrpwb8] {
+    font-size: 30pt;
+    padding-top: 20px;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+}

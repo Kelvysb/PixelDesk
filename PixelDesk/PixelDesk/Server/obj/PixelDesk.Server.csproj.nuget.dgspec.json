@@ -1,0 +1,216 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Server\\PixelDesk.Server.csproj": {}
+  },
+  "projects": {
+    "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Client\\PixelDesk.Client.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Client\\PixelDesk.Client.csproj",
+        "projectName": "PixelDesk.Client",
+        "projectPath": "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Client\\PixelDesk.Client.csproj",
+        "packagesPath": "C:\\Users\\Kelvy\\.nuget\\packages\\",
+        "outputPath": "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Client\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Kelvy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Shared\\PixelDesk.Shared.csproj": {
+                "projectPath": "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Shared\\PixelDesk.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.WebAssembly": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "System.Net.Http.Json": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Runtime.browser-wasm",
+              "version": "[5.0.4, 5.0.4]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "browser-wasm": {
+          "#import": []
+        }
+      }
+    },
+    "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Server\\PixelDesk.Server.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Server\\PixelDesk.Server.csproj",
+        "projectName": "PixelDesk.Server",
+        "projectPath": "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Server\\PixelDesk.Server.csproj",
+        "packagesPath": "C:\\Users\\Kelvy\\.nuget\\packages\\",
+        "outputPath": "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Server\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Kelvy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Client\\PixelDesk.Client.csproj": {
+                "projectPath": "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Client\\PixelDesk.Client.csproj"
+              },
+              "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Shared\\PixelDesk.Shared.csproj": {
+                "projectPath": "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Shared\\PixelDesk.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.WebAssembly.Server": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Shared\\PixelDesk.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Shared\\PixelDesk.Shared.csproj",
+        "projectName": "PixelDesk.Shared",
+        "projectPath": "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Shared\\PixelDesk.Shared.csproj",
+        "packagesPath": "C:\\Users\\Kelvy\\.nuget\\packages\\",
+        "outputPath": "D:\\Repositories\\PixelDesk\\PixelDesk\\PixelDesk\\Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Kelvy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

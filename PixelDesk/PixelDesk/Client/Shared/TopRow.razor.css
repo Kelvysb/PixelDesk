@@ -1,0 +1,32 @@
+﻿.top-row {
+    width: 100%;
+    height: var(--top-row-height);
+}
+
+.box-content {
+    padding-top: 20px;
+    display: flex;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.clock {
+    font-size: 20pt;
+    margin-left: 5px;
+}
+
+.states {
+    font-size: 20pt;
+    margin-right: 5px;
+    display: flex;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}

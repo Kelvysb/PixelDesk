@@ -1,0 +1,10 @@
+﻿@page "/"
+@inherits IndexBase
+
+<div class="main-container @(alert ? "alert": "")" @onkeydown="@KeyDown" tabindex="0" @ref="mainDiv">
+    <TopRow Clock="@clock" IntercomState="@intercomState" WeatherState="@weatherState" />
+    <div class="center-content">
+        <Weather OpenWeather="@WeatherData"></Weather>
+    </div>
+    <BottomBox MessageLine1="@bottomBoxMessageLine1" MessageLine2="@bottomBoxMessageLine2" />
+</div>

@@ -1,0 +1,6 @@
+{
+    "weatherApiKey": "b52974c053fc7883d71c22022e5d8200",
+    "city": "blumenau",
+    "intercomUrl": "http://192.168.100.14",
+    "logFile": "pixeldesk.log"
+}
