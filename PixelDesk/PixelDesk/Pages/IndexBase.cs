@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using PixelDesk.Domain.Abstractions.Services;
+using PixelDesk.Domain.Extesnsions;
 using PixelDesk.Domain.Models;
 
 namespace PixelDesk.Pages
@@ -22,10 +23,10 @@ namespace PixelDesk.Pages
         private static int WEATHER_INTERVAL = 30000;
         private Timer weatherTimer;
         private Timer clockTimer;
-        private DateTime lastAlarm = DateTime.Now.AddMinutes(-1);
+        private DateTime lastAlarm = DateTime.UtcNow.AddMinutes(-1);
         private int alarmRetain = 5;
         private int intercomOnlineTime = 20;
-        private DateTime lastIntercomSignal = DateTime.Now.AddMinutes(-1);
+        private DateTime lastIntercomSignal = DateTime.UtcNow.AddMinutes(-1);
 
         [Inject]
         public IWeatherService WeatherService { get; set; }
@@ -85,14 +86,14 @@ namespace PixelDesk.Pages
             try
             {
                 if (intercomData == null) return;
-                lastIntercomSignal = DateTime.Now;
+                lastIntercomSignal = DateTime.UtcNow;
                 if (intercomData.Intercom)
                 {
                     alert = true;
                     bottomBoxMessageLine1 = "INTERCOM !!";
-                    lastAlarm = DateTime.Now;
+                    lastAlarm = DateTime.UtcNow;
                 }
-                else if (DateTime.Now.Subtract(lastAlarm).TotalSeconds >= alarmRetain)
+                else if (DateTime.UtcNow.Subtract(lastAlarm).TotalSeconds >= alarmRetain)
                 {
                     alert = false;
                     bottomBoxMessageLine1 = "";
@@ -116,8 +117,8 @@ namespace PixelDesk.Pages
         {
             try
             {
-                clock = DateTime.Now.ToString("HH:mm - dd/MM/yyyy");
-                if (DateTime.Now.Subtract(lastIntercomSignal).TotalSeconds > intercomOnlineTime)
+                clock = DateTime.UtcNow.Local().ToString("HH:mm - dd/MM/yyyy");
+                if (DateTime.UtcNow.Subtract(lastIntercomSignal).TotalSeconds > intercomOnlineTime)
                 {
                     intercomState = "Offline";
                     alert = false;

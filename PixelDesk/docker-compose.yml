@@ -10,6 +10,8 @@ services:
           - "5010:5010"
         networks:
           - local
+        environment:
+          - TIMEZONE=-3
 
 networks:
     local:
