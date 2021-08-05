@@ -1,0 +1,16 @@
+version: "3"
+services:
+    pixeldesk:
+        build: .
+        hostname: pixelkdesk
+        container_name: pixelkdesk
+        expose:
+          - "5010"
+        ports:
+          - "5010:5010"
+        networks:
+          - local
+
+networks:
+    local:
+        driver: bridge
