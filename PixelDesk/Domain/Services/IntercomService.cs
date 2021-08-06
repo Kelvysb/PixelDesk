@@ -21,7 +21,8 @@ namespace PixelDesk.Domain.Services
         private readonly IManagedMqttClient managedMqttClientSubscriber;
         private Action<IntercomData> receiveMessageHandler;
 
-        public IntercomService(MQTTConfig mqttConfig)
+        public IntercomService(
+            MQTTConfig mqttConfig)
         {
             this.mqttConfig = mqttConfig;
             mqttOptions = ConfigureMQTT(mqttConfig);
@@ -79,7 +80,7 @@ namespace PixelDesk.Domain.Services
         {
             var options = new MqttClientOptions
             {
-                ClientId = mqttConfig.DeviceId,
+                ClientId = $"{mqttConfig.DeviceId}-{Helpers.SessionIdHelper.CreateSessionId()}",
                 ProtocolVersion = MqttProtocolVersion.V500,
                 ChannelOptions = new MqttClientTcpOptions
                 {

@@ -21,7 +21,7 @@ namespace PixelDesk.Domain.Services
 
         public async Task<OpenWeather> getWeather()
         {
-            var response = await httpClient.GetAsync($"?q={weatherApiConfig.City}&units=metric&appid={weatherApiConfig.ApiKey}");
+            var response = await httpClient.GetAsync($"?lat={weatherApiConfig.Latitude}&lon={weatherApiConfig.Longitude}&units=metric&appid={weatherApiConfig.ApiKey}");
             if (response.StatusCode != System.Net.HttpStatusCode.OK) throw new HttpRequestException(response.ReasonPhrase, null, response.StatusCode);
             return JsonSerializer.Deserialize<OpenWeather>(await response.Content.ReadAsStringAsync());
         }

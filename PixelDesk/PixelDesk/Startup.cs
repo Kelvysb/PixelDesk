@@ -34,7 +34,7 @@ namespace PixelDesk
             Configuration.GetSection("OpenWeatherApi").Bind(weatherApiConfig);
             services.AddSingleton(provider => weatherApiConfig);
 
-            services.AddSingleton<IIntercomService, IntercomService>();
+            services.AddTransient<IIntercomService, IntercomService>();
             services.AddSingleton<IWeatherService, WeatherService>();
             services.AddScoped(sp => new HttpClient());
         }
