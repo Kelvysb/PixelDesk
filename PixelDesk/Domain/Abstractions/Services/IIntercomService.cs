@@ -6,7 +6,7 @@ namespace PixelDesk.Domain.Abstractions.Services
 {
     public interface IIntercomService
     {
-        Task Subscribe(Action<IntercomData> receiveMessage);
+        Task Subscribe(Action<DeviceData> receiveMessage);
 
         Task Unsubscribe();
     }

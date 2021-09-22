@@ -19,7 +19,7 @@ namespace PixelDesk.Domain.Services
         private readonly MQTTConfig mqttConfig;
         private readonly MqttClientOptions mqttOptions;
         private readonly IManagedMqttClient managedMqttClientSubscriber;
-        private Action<IntercomData> receiveMessageHandler;
+        private Action<DeviceData> receiveMessageHandler;
 
         public IntercomService(
             MQTTConfig mqttConfig)
@@ -30,7 +30,7 @@ namespace PixelDesk.Domain.Services
                 .CreateManagedMqttClient();
         }
 
-        public async Task Subscribe(Action<IntercomData> receiveMessage)
+        public async Task Subscribe(Action<DeviceData> receiveMessage)
         {
             receiveMessageHandler = receiveMessage;
             managedMqttClientSubscriber.ConnectedHandler = new MqttClientConnectedHandlerDelegate(OnSubscriberConnected);
@@ -71,7 +71,7 @@ namespace PixelDesk.Domain.Services
             if (args.ApplicationMessage != null && args.ApplicationMessage.Payload != null)
             {
                 var message = Encoding.UTF8.GetString(args.ApplicationMessage.Payload);
-                var result = JsonSerializer.Deserialize<IntercomData>(message);
+                var result = JsonSerializer.Deserialize<DeviceData>(message);
                 receiveMessageHandler.Invoke(result);
             }
         }

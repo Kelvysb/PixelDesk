@@ -34,7 +34,7 @@ namespace PixelDesk.Pages
         [Inject]
         public IIntercomService IntercomService { get; set; }
 
-        public IntercomData IntercomData { get; set; }
+        public DeviceData IntercomData { get; set; }
 
         public OpenWeather WeatherData { get; set; }
 
@@ -68,7 +68,7 @@ namespace PixelDesk.Pages
                 0,
                 WEATHER_INTERVAL);
 
-            await IntercomService.Subscribe(async (IntercomData intercomData) => await IntercomUpdate(intercomData));
+            await IntercomService.Subscribe(async (DeviceData intercomData) => await IntercomUpdate(intercomData));
 
             await base.OnInitializedAsync();
         }
@@ -81,13 +81,13 @@ namespace PixelDesk.Pages
             }
         }
 
-        private async Task IntercomUpdate(IntercomData intercomData)
+        private async Task IntercomUpdate(DeviceData intercomData)
         {
             try
             {
                 if (intercomData == null) return;
                 lastIntercomSignal = DateTime.UtcNow;
-                if (intercomData.Intercom)
+                if (intercomData.Sensors.D0.Value)
                 {
                     alert = true;
                     bottomBoxMessageLine1 = "INTERCOM !!";

@@ -4,6 +4,7 @@ services:
         build: .
         hostname: pixelkdesk
         container_name: pixelkdesk
+        restart: always
         expose:
           - "5010"
         ports:
