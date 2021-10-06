@@ -351,3 +351,6 @@ MigrationBackup/
 #Rider stuff
 .idea/
 .vscode
+
+#Env file
+.env

@@ -1,0 +1,29 @@
+version: "3"
+services:
+    pixeldesk:
+        image: kelvysb/pixeldesk:latest
+        hostname: pixelkdesk
+        container_name: pixelkdesk
+        restart: always
+        expose:
+          - "${PIXELDESK_PORT:-5010}"
+        ports:
+          - "${PIXELDESK_PORT:-5010}:${PIXELDESK_PORT:-5010}"
+        networks:
+          - local
+        environment:
+          - TIMEZONE=${TIMEZONE:--3}
+          - PIXELDESK_PORT=${PIXELDESK_PORT:-5010}
+          - MQTT_SERVER=${MQTT_SERVER:?env var MQTT_SERVER not found}
+          - MQTT_PORT=${MQTT_PORT:-1883}
+          - MQTT_USER=${MQTT_USER:?env var MQTT_USER not found}
+          - MQTT_PASSWORD=${MQTT_PASSWORD:?env var MQTT_PASSWORD not found}
+          - MQTT_INTERCOM_TOPIC=${MQTT_INTERCOM_TOPIC:-devices/SA001/state}
+          - MQTT_DEVICE_ID=${MQTT_DEVICE_ID:-PixelDeskApp}
+          - OW_URL=${OW_URL:?env var OW_URL not found}
+          - OW_APIKEY=${OW_APIKEY:?env var OW_APIKEY not found}
+          - OW_LATITUDE=${OW_LATITUDE:?env var OW_LATITUDE not found}
+          - OW_LONGITUDE=${OW_LONGITUDE:?env var OW_LONGITUDE not found}
+networks:
+    local:
+        driver: bridge

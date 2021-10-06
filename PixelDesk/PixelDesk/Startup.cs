@@ -26,13 +26,23 @@ namespace PixelDesk
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            var mqttConfig = new MQTTConfig();
-            Configuration.GetSection("MQTT").Bind(mqttConfig);
-            services.AddSingleton(provider => mqttConfig);
+            services.AddSingleton(provider => new MQTTConfig 
+            {
+                DeviceId = Configuration["MQTT_DEVICE_ID"],
+                IntercomTopic = Configuration["MQTT_INTERCOM_TOPIC"],
+                Server = Configuration["MQTT_SERVER"],
+                Port = int.Parse(Configuration["MQTT_PORT"]),
+                User = Configuration["MQTT_USER"],
+                Password = Configuration["MQTT_PASSWORD"]
+            });
 
-            var weatherApiConfig = new WeatherApiConfig();
-            Configuration.GetSection("OpenWeatherApi").Bind(weatherApiConfig);
-            services.AddSingleton(provider => weatherApiConfig);
+           services.AddSingleton(provider => new WeatherApiConfig 
+            {
+                Url = Configuration["OW_URL"],
+                ApiKey = Configuration["OW_APIKEY"],
+                Latitude = Configuration["OW_LATITUDE"],
+                Longitude = Configuration["OW_LONGITUDE"]
+            });
 
             services.AddTransient<IIntercomService, IntercomService>();
             services.AddSingleton<IWeatherService, WeatherService>();

@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using PixelDesk.Domain.Extesnsions;
 
 namespace PixelDesk
 {
@@ -16,8 +18,16 @@ namespace PixelDesk
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    var config = new ConfigurationBuilder()
+                        .UseDotEnv("../../Docker/.env")
+                        .AddEnvironmentVariables()
+                        .AddJsonFile("appsettings.json", optional: false)
+                        .AddCommandLine(args)
+                        .Build();
+
                     webBuilder.UseStartup<Startup>()
-                    .UseUrls("http://*:5010");
+                    .UseConfiguration(config)
+                    .UseUrls($"http://*:{config["PIXELDESK_PORT"]}");
                 });
     }
 }
