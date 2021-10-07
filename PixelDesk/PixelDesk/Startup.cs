@@ -1,4 +1,3 @@
-using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using PixelDesk.Domain.Abstractions.Services;
 using PixelDesk.Domain.Models;
 using PixelDesk.Domain.Services;
+using System.Net.Http;
 
 namespace PixelDesk
 {
@@ -26,17 +26,18 @@ namespace PixelDesk
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            services.AddSingleton(provider => new MQTTConfig 
+            services.AddSingleton(provider => new MQTTConfig
             {
                 DeviceId = Configuration["MQTT_DEVICE_ID"],
                 IntercomTopic = Configuration["MQTT_INTERCOM_TOPIC"],
                 Server = Configuration["MQTT_SERVER"],
                 Port = int.Parse(Configuration["MQTT_PORT"]),
                 User = Configuration["MQTT_USER"],
-                Password = Configuration["MQTT_PASSWORD"]
+                Password = Configuration["MQTT_PASSWORD"],
+                ResultJPath = Configuration["MQTT_VALUE_JPATH"]
             });
 
-           services.AddSingleton(provider => new WeatherApiConfig 
+            services.AddSingleton(provider => new WeatherApiConfig
             {
                 Url = Configuration["OW_URL"],
                 ApiKey = Configuration["OW_APIKEY"],

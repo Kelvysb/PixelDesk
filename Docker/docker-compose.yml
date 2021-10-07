@@ -20,6 +20,7 @@ services:
           - MQTT_PASSWORD=${MQTT_PASSWORD:?env var MQTT_PASSWORD not found}
           - MQTT_INTERCOM_TOPIC=${MQTT_INTERCOM_TOPIC:-devices/SA001/state}
           - MQTT_DEVICE_ID=${MQTT_DEVICE_ID:-PixelDeskApp}
+          - MQTT_VALUE_JPATH=${MQTT_VALUE_JPATH:-$..sensors.d0.value}
           - OW_URL=${OW_URL:?env var OW_URL not found}
           - OW_APIKEY=${OW_APIKEY:?env var OW_APIKEY not found}
           - OW_LATITUDE=${OW_LATITUDE:?env var OW_LATITUDE not found}

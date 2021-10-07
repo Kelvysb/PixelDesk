@@ -1,8 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using MQTTnet;
+﻿using MQTTnet;
 using MQTTnet.Client.Connecting;
 using MQTTnet.Client.Disconnecting;
 using MQTTnet.Client.Options;
@@ -11,6 +7,11 @@ using MQTTnet.Extensions.ManagedClient;
 using MQTTnet.Formatter;
 using PixelDesk.Domain.Abstractions.Services;
 using PixelDesk.Domain.Models;
+using System;
+using System.Linq;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PixelDesk.Domain.Services
 {
@@ -19,7 +20,7 @@ namespace PixelDesk.Domain.Services
         private readonly MQTTConfig mqttConfig;
         private readonly MqttClientOptions mqttOptions;
         private readonly IManagedMqttClient managedMqttClientSubscriber;
-        private Action<DeviceData> receiveMessageHandler;
+        private Action<bool> receiveMessageHandler;
 
         public IntercomService(
             MQTTConfig mqttConfig)
@@ -30,7 +31,7 @@ namespace PixelDesk.Domain.Services
                 .CreateManagedMqttClient();
         }
 
-        public async Task Subscribe(Action<DeviceData> receiveMessage)
+        public async Task Subscribe(Action<bool> receiveMessage)
         {
             receiveMessageHandler = receiveMessage;
             managedMqttClientSubscriber.ConnectedHandler = new MqttClientConnectedHandlerDelegate(OnSubscriberConnected);
@@ -71,8 +72,9 @@ namespace PixelDesk.Domain.Services
             if (args.ApplicationMessage != null && args.ApplicationMessage.Payload != null)
             {
                 var message = Encoding.UTF8.GetString(args.ApplicationMessage.Payload);
-                var result = JsonSerializer.Deserialize<DeviceData>(message);
-                receiveMessageHandler.Invoke(result);
+                var result = JsonDocument.Parse(message);
+                var value = result.SelectElements(mqttConfig.ResultJPath).FirstOrDefault();
+                receiveMessageHandler.Invoke(value.HasValue && value.Value.ValueKind == JsonValueKind.True);
             }
         }
 

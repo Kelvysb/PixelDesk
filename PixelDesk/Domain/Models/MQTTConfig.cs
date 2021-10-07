@@ -13,5 +13,7 @@
         public string DeviceId { get; set; }
 
         public string IntercomTopic { get; set; }
+
+        public string ResultJPath { get; set; }
     }
 }

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using PixelDesk.Domain.Abstractions.Services;
 using PixelDesk.Domain.Extesnsions;
 using PixelDesk.Domain.Models;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PixelDesk.Pages
 {
@@ -33,8 +33,6 @@ namespace PixelDesk.Pages
 
         [Inject]
         public IIntercomService IntercomService { get; set; }
-
-        public DeviceData IntercomData { get; set; }
 
         public OpenWeather WeatherData { get; set; }
 
@@ -68,7 +66,7 @@ namespace PixelDesk.Pages
                 0,
                 WEATHER_INTERVAL);
 
-            await IntercomService.Subscribe(async (DeviceData intercomData) => await IntercomUpdate(intercomData));
+            await IntercomService.Subscribe(async (bool value) => await IntercomUpdate(value));
 
             await base.OnInitializedAsync();
         }
@@ -81,13 +79,12 @@ namespace PixelDesk.Pages
             }
         }
 
-        private async Task IntercomUpdate(DeviceData intercomData)
+        private async Task IntercomUpdate(bool value)
         {
             try
             {
-                if (intercomData == null) return;
                 lastIntercomSignal = DateTime.UtcNow;
-                if (intercomData.Sensors.D0.Value)
+                if (value)
                 {
                     alert = true;
                     bottomBoxMessageLine1 = "INTERCOM !!";
