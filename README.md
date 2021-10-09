@@ -26,6 +26,7 @@ OW_APIKEY=<Open weather map api key>
 OW_LATITUDE=<Your location latitude>
 OW_LONGITUDE=<Your location longitude>
 ```
+Examples:
 
 MQTT config:
 `
