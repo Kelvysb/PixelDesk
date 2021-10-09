@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "PixelDesk\\env\\Scripts\\python.exe"
+    "python.pythonPath": "PixelDesk\\env\\Scripts\\python.exe",
+    "cSpell.language": "pt,pt-BR,en"
 }

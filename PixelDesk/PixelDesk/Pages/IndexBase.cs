@@ -93,7 +93,7 @@ namespace PixelDesk.Pages
                     alert = true;
                     bottomBoxMessageLine1 = "INTERCOM !!";
                     lastAlarm = DateTime.UtcNow;
-                    bottomBoxMessageLine2 = $"Last intercom call: {DateTime.Now:G}";
+                    bottomBoxMessageLine2 = $"Last intercom call: {DateTime.UtcNow.Local():G}";
                 }
                 else if (DateTime.UtcNow.Subtract(lastAlarm).TotalSeconds >= alarmRetain)
                 {
