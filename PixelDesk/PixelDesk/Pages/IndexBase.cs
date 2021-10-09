@@ -41,6 +41,10 @@ namespace PixelDesk.Pages
 
         public void KeyDown(KeyboardEventArgs e)
         {
+            if(e.Key == "*")
+            {
+                IntercomUpdate(true);
+            }
         }
 
         public void Dispose()
@@ -89,6 +93,7 @@ namespace PixelDesk.Pages
                     alert = true;
                     bottomBoxMessageLine1 = "INTERCOM !!";
                     lastAlarm = DateTime.UtcNow;
+                    bottomBoxMessageLine2 = $"Last intercom call: {DateTime.Now:G}";
                 }
                 else if (DateTime.UtcNow.Subtract(lastAlarm).TotalSeconds >= alarmRetain)
                 {
