@@ -36,12 +36,14 @@ namespace PixelDesk.Pages
 
         public OpenWeather WeatherData { get; set; }
 
+        public LocalWeather LocalWeatherData { get; set; }
+
         [Inject]
         private IJSRuntime JSRuntime { get; set; }
 
         public void KeyDown(KeyboardEventArgs e)
         {
-            if(e.Key == "*")
+            if (e.Key == "*")
             {
                 IntercomUpdate(true);
             }
@@ -137,7 +139,8 @@ namespace PixelDesk.Pages
         {
             try
             {
-                WeatherData = await WeatherService.getWeather();
+                WeatherData = await WeatherService.GetWeather();
+                LocalWeatherData = await WeatherService.GetLocalWeather();
                 weatherState = "Online";
             }
             catch (Exception ex)

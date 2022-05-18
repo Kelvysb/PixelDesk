@@ -26,7 +26,8 @@
         "MQTT_PORT": "1883",
         "MQTT_DEVICE_ID": "PixelDeskApp",
         "MQTT_VALUE_JPATH": "$..sensors.d0.value",
-        "PIXELDESK_PORT": "5010"
+        "PIXELDESK_PORT": "5010",
+        "LOCAL_WEATHER_URL": "http://192.168.100.41"
       },
       "dotnetRunMessages": "true",
       "applicationUrl": "http://localhost:5010"

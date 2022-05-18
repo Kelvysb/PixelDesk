@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
-using PixelDesk.Domain.Models;
+﻿using PixelDesk.Domain.Models;
+using System.Threading.Tasks;
 
 namespace PixelDesk.Domain.Abstractions.Services
 {
     public interface IWeatherService
     {
-        Task<OpenWeather> getWeather();
+        Task<OpenWeather> GetWeather();
+
+        Task<LocalWeather> GetLocalWeather();
     }
 }

@@ -42,7 +42,8 @@ namespace PixelDesk
                 Url = Configuration["OW_URL"],
                 ApiKey = Configuration["OW_APIKEY"],
                 Latitude = Configuration["OW_LATITUDE"],
-                Longitude = Configuration["OW_LONGITUDE"]
+                Longitude = Configuration["OW_LONGITUDE"],
+                LocalUrl = Configuration["LOCAL_WEATHER_URL"]
             });
 
             services.AddTransient<IIntercomService, IntercomService>();

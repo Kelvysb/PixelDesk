@@ -9,19 +9,40 @@
     <div class="middle-frame">
         <img src="/images/Box_S.png" class="stretch-column" />
         <div class="frame-content box-content-weather">
-            @if (OpenWeather != null)
-            {
-                <div class="infos">
-                    <label>Temperature: @OpenWeather.Main.Temp&deg;</label>
+            <div class="infos">
+                @if (LocalWeather != null)
+                {
+                    <label>Temperature: @LocalWeather.Temperature&deg;</label>
+                }
+                else if (OpenWeather != null)
+                {
+                    <label>Temperature*: @OpenWeather.Main.Temp&deg;</label>
+                }
+
+                @if (OpenWeather != null)
+                {
                     <label>Feels Like: @OpenWeather.Main.FeelsLike&deg;</label>
-                    <label>Humidity: @OpenWeather.Main.Humidity%</label>
+                }
+
+                @if (LocalWeather != null)
+                {
+                    <label>Humidity: @LocalWeather.Humidity%</label>
+                }
+                else if (OpenWeather != null)
+                {
+                    <label>Humidity*: @OpenWeather.Main.Humidity%</label>
+                }
+
+                @if (OpenWeather != null)
+                {
                     <label>Weather: @OpenWeather.Weather.First().Description</label>
                     <label>Wind: @OpenWeather.Wind.Speed m/s</label>
-                </div>
-                <div class="weather-icon">
-                    <img src="@Icon" class="icon" />
-                </div>
-            }
+                }
+
+            </div>
+            <div class="weather-icon">
+                <img src="@Icon" class="icon" />
+            </div>
         </div>
         <img src="/images/Box_S.png" class="stretch-column" />
     </div>
