@@ -11,8 +11,6 @@ namespace PixelDesk.Domain.Services
     {
         private readonly WeatherApiConfig weatherApiConfig;
         private readonly HttpClient httpClient;
-        private readonly string openWeatherServiceUrl;
-        private readonly string localWeatherServiceUrl;
 
         public WeatherService(WeatherApiConfig weatherApiConfig)
         {
